@@ -1,0 +1,18 @@
+set -e
+
+echo "[*] Updating system..."
+sudo apt update && sudo apt upgrade -y
+
+echo "[*] Adding Kali Linux repository..."
+echo "deb http://http.kali.org/kali kali-rolling main contrib non-free" | sudo tee /etc/apt/sources.list.d/kali.list
+
+echo "[*] Importing Kali GPG key..."
+curl -fsSL https://archive.kali.org/archive-key.asc | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/kali-archive-keyring.gpg
+
+echo "[*] Updating package lists..."
+sudo apt update
+
+echo "[*] Installing Kali core tools..."
+sudo apt install -y kali-linux-core
+
+echo "[*] Done! Type 'nmap', 'john', 'sqlmap', etc. to start using Kali tools."
